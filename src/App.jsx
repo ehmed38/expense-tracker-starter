@@ -42,7 +42,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!description || !amount) return;
+    if (!description || !amount || Number(amount) <= 0) return;
 
     const newTransaction = {
       id: Date.now(),
@@ -93,6 +93,8 @@ function App() {
           <input
             type="number"
             placeholder="Amount"
+            min="0"
+            step="0.01"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
