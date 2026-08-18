@@ -146,3 +146,15 @@ th {
   font-size: 12px;
   color: #333;
 }
+
+.confirm-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #333;
+}
+
+.cancel-btn {
+  background: #fff;
+}

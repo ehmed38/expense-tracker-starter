@@ -16,10 +16,21 @@ function App() {
     { id: 8, description: "Netflix", amount: 15, type: "expense", category: "entertainment", date: "2025-01-10" },
   ]);
 
+  const [description, setDescription] = useState("");
+  const [amount, setAmount] = useState("");
+  const [type, setType] = useState("expense");
+  const [category, setCategory] = useState("food");
+  const [filterType, setFilterType] = useState("all");
+  const [filterCategory, setFilterCategory] = useState("all");
+
   const categories = ["food", "housing", "utilities", "transport", "entertainment", "salary", "other"];
 
   const handleAddTransaction = (transaction) => {
     setTransactions([...transactions, transaction]);
+  };
+
+  const handleDeleteTransaction = (id) => {
+    setTransactions(transactions.filter(t => t.id !== id));
   };
 
   return (
@@ -31,7 +42,7 @@ function App() {
 
       <TransactionForm categories={categories} onAdd={handleAddTransaction} />
 
-      <TransactionList transactions={transactions} categories={categories} />
+      <TransactionList transactions={transactions} categories={categories} onDelete={handleDeleteTransaction} />
     </div>
   );
 }
