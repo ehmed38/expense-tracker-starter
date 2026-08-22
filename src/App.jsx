@@ -17,13 +17,6 @@ function App() {
     { id: 8, description: "Netflix", amount: 15, type: "expense", category: "entertainment", date: "2025-01-10" },
   ]);
 
-  const [description, setDescription] = useState("");
-  const [amount, setAmount] = useState("");
-  const [type, setType] = useState("expense");
-  const [category, setCategory] = useState("food");
-  const [filterType, setFilterType] = useState("all");
-  const [filterCategory, setFilterCategory] = useState("all");
-
   const categories = ["food", "housing", "utilities", "transport", "entertainment", "salary", "other"];
 
   const handleAddTransaction = (transaction) => {
@@ -36,16 +29,31 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Finance Tracker</h1>
-      <p className="subtitle">Track your income and expenses</p>
+      <div className="ledger-page">
+        <header className="ledger-header">
+          <h1>Finance Ledger</h1>
+          <p className="subtitle">Track what comes in and what goes out.</p>
+        </header>
 
-      <Summary transactions={transactions} />
+        <section className="ledger-section">
+          <Summary transactions={transactions} />
+        </section>
 
-      <CategoryChart transactions={transactions} />
+        <section className="ledger-section category-chart">
+          <h2 className="section-title">Spending by category</h2>
+          <CategoryChart transactions={transactions} />
+        </section>
 
-      <TransactionForm categories={categories} onAdd={handleAddTransaction} />
+        <section className="ledger-section">
+          <h2 className="section-title">New entry</h2>
+          <TransactionForm categories={categories} onAdd={handleAddTransaction} />
+        </section>
 
-      <TransactionList transactions={transactions} categories={categories} onDelete={handleDeleteTransaction} />
+        <section className="ledger-section">
+          <h2 className="section-title">Register</h2>
+          <TransactionList transactions={transactions} categories={categories} onDelete={handleDeleteTransaction} />
+        </section>
+      </div>
     </div>
   );
 }

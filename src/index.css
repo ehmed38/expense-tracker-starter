@@ -1,11 +1,48 @@
+:root {
+  --desk: #ddd5c1;
+  --paper: #f8f5eb;
+  --paper-line: #ddd5bd;
+  --ink: #262620;
+  --ink-soft: #746e5d;
+  --credit: #2f6b4a;
+  --debit: #8c2f39;
+  --margin: #b5423a;
+  --brass: #a67c2e;
+
+  --font-display: "Source Serif 4", Georgia, serif;
+  --font-sans: "IBM Plex Sans", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "Consolas", monospace;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #ffffff;
-  color: #333;
+  font-family: var(--font-sans);
+  background-color: var(--desk);
+  color: var(--ink);
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+  color: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

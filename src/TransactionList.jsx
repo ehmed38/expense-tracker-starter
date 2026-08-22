@@ -14,16 +14,23 @@ function TransactionList({ transactions, categories, onDelete }) {
   }
 
   return (
-    <div className="transactions">
-      <h2>Transactions</h2>
+    <div>
       <div className="filters">
-        <select value={filterType} onChange={(e) => setFilterType(e.target.value)}>
-          <option value="all">All Types</option>
+        <select
+          value={filterType}
+          onChange={(e) => setFilterType(e.target.value)}
+          aria-label="Filter by type"
+        >
+          <option value="all">All types</option>
           <option value="income">Income</option>
           <option value="expense">Expense</option>
         </select>
-        <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)}>
-          <option value="all">All Categories</option>
+        <select
+          value={filterCategory}
+          onChange={(e) => setFilterCategory(e.target.value)}
+          aria-label="Filter by category"
+        >
+          <option value="all">All categories</option>
           {categories.map(cat => (
             <option key={cat} value={cat}>{cat}</option>
           ))}
@@ -43,21 +50,31 @@ function TransactionList({ transactions, categories, onDelete }) {
         <tbody>
           {filteredTransactions.map(t => (
             <tr key={t.id}>
-              <td>{t.date}</td>
-              <td>{t.description}</td>
-              <td>{t.category}</td>
-              <td className={t.type === "income" ? "income-amount" : "expense-amount"}>
+              <td className="date-cell" data-label="Date">{t.date}</td>
+              <td data-label="Description">{t.description}</td>
+              <td data-label="Category">{t.category}</td>
+              <td
+                className={`amount-cell ${t.type === "income" ? "income-amount" : "expense-amount"}`}
+                data-label="Amount"
+              >
                 {t.type === "income" ? "+" : "-"}${t.amount}
               </td>
-              <td>
+              <td data-label="Actions">
                 {confirmingId === t.id ? (
                   <span className="confirm-actions">
-                    Delete?
-                    <button className="delete-btn" onClick={() => { onDelete(t.id); setConfirmingId(null); }}>Yes</button>
-                    <button className="delete-btn cancel-btn" onClick={() => setConfirmingId(null)}>Cancel</button>
+                    Remove entry?
+                    <button
+                      className="remove-btn confirm"
+                      onClick={() => { onDelete(t.id); setConfirmingId(null); }}
+                    >
+                      Remove
+                    </button>
+                    <button className="remove-btn cancel" onClick={() => setConfirmingId(null)}>
+                      Keep
+                    </button>
                   </span>
                 ) : (
-                  <button className="delete-btn" onClick={() => setConfirmingId(t.id)}>Delete</button>
+                  <button className="remove-btn" onClick={() => setConfirmingId(t.id)}>Remove</button>
                 )}
               </td>
             </tr>
